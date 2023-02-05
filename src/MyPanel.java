@@ -1,11 +1,8 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.TimerTask;
 
 /**
  * Класс панели игрового поля
@@ -16,7 +13,7 @@ public class MyPanel extends JPanel {
     private MyGame myGame;
 
     // Таймеры отрисовки и изменения логики игры
-    private Timer tmDraw, tmUpdate;
+   // private Timer tmDraw;
 
     // Изображения, используемые в игре
     private Image fon, telo, golova, ob, endg;
@@ -45,28 +42,13 @@ public class MyPanel extends JPanel {
         myGame = new MyGame();
         myGame.start();
 
-        tmDraw = new Timer(20, new ActionListener() {
+/*        tmDraw = new Timer(20, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 repaint();
             }
-        });
+        });*/
        // tmDraw = new Timer(20, e -> repaint());
-        tmDraw.start();
-
-        tmUpdate = new Timer(500, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Перемещаем голову змейки
-                myGame.peremGolova();
-
-                // Выводим информацию о количестве очков
-                lb.setText("Счет" + myGame.kol);
-            }
-        });
-        tmUpdate.start();
-
-
 
         // Чтобы размещать элементы как хотим
         setLayout(null);
