@@ -66,8 +66,6 @@ public class MyPanel extends JPanel {
         });
         tmUpdate.start();
 
-
-
         // Чтобы размещать элементы как хотим
         setLayout(null);
 
