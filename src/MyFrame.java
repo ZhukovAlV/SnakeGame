@@ -16,6 +16,12 @@ public class MyFrame extends JFrame {
         MyPanel myPanel = new MyPanel();
         add(myPanel);
 
+        // Завершение программы при закрытии окна
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Запрет на изменение окна
+        setResizable(false);
+
         // Отображаем окно
         setVisible(true);
     }

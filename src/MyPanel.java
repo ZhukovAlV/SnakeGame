@@ -3,9 +3,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.TimerTask;
 
 /**
  * Класс панели игрового поля
@@ -89,6 +90,12 @@ public class MyPanel extends JPanel {
         btn2.setBounds(630,100,150,50);
         btn2.addChangeListener(event -> System.exit(0));
         add(btn2);
+
+        // Подключаем слушателя на нажатие клавиатуры
+        addKeyListener(new MyKey());
+
+        // Делаем панель в фокусе для приема событий от клавиатуры
+        setFocusable(true);
     }
 
     // Метод отрисовки
@@ -118,6 +125,34 @@ public class MyPanel extends JPanel {
         for (int i = 0; i < 30; i++) {
             gr.drawLine(10 + i*20,10, 10 + i*20, 610);
             gr.drawLine(10,10 + i*20, 610, 10 + i*20);
+        }
+    }
+
+    class MyKey implements KeyListener {
+        @Override
+        public void keyTyped(KeyEvent e) {
+
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+
+            // Получение кода нажатой клавиши
+            int key = e.getKeyCode();
+
+            // Если нажатие одной из стрелочек, то мнеяем направление
+            switch (key) {
+                case KeyEvent.VK_LEFT -> myGame.napr = 0;
+                case KeyEvent.VK_UP -> myGame.napr = 1;
+                case KeyEvent.VK_RIGHT -> myGame.napr = 2;
+                case KeyEvent.VK_DOWN -> myGame.napr = 3;
+            }
+
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+
         }
     }
 }
