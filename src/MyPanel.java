@@ -62,7 +62,7 @@ public class MyPanel extends JPanel {
                 myGame.peremGolova();
 
                 // Выводим информацию о количестве очков
-                lb.setText("Счет" + myGame.kol);
+                lb.setText("Счет " + myGame.kol);
             }
         });
         tmUpdate.start();
@@ -81,14 +81,21 @@ public class MyPanel extends JPanel {
         btn1.setForeground(Color.BLUE);
         btn1.setFont(new Font("serif", 0,20));
         btn1.setBounds(630,30,150,50);
-        btn1.addChangeListener(event -> myGame.start());
-        add(btn1);
 
         btn2 = new JButton("Выход");
         btn2.setForeground(Color.RED);
         btn2.setFont(new Font("serif", 0,20));
         btn2.setBounds(630,100,150,50);
-        btn2.addChangeListener(event -> System.exit(0));
+
+        btn1.addActionListener(event -> {
+            myGame.start();
+            btn1.setFocusable(false);
+            btn2.setFocusable(false);
+            setFocusable(true);
+        });
+        add(btn1);
+
+        btn2.addActionListener(event -> System.exit(0));
         add(btn2);
 
         // Подключаем слушателя на нажатие клавиатуры
@@ -122,7 +129,7 @@ public class MyPanel extends JPanel {
 
         // Отрисовка сетки игрового поля
         gr.setColor(Color.BLUE);
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i <= 30; i++) {
             gr.drawLine(10 + i*20,10, 10 + i*20, 610);
             gr.drawLine(10,10 + i*20, 610, 10 + i*20);
         }
