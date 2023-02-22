@@ -137,7 +137,7 @@ public class MyPanel extends JPanel {
             gr.drawLine(10,10 + i*20, 610, 10 + i*20);
         }
 
-        if (myGame.endg) gr.drawImage(endg, 250, 200,200,100,null);
+        if (myGame.endg) gr.drawImage(endg, 10, 10,600,340,null);
     }
 
     class MyKey implements KeyListener {
