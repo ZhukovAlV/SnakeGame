@@ -1,11 +1,19 @@
-/**
- * Главный класс программы
- */
+import javax.swing.*;
+
 public class Main {
 
     public static void main(String[] args) {
-        // Запускается приложение
-        MyFrame myFrame = new MyFrame();
+        JFrame frame = new JFrame();
+
+        frame.setTitle("РРіСЂР° Р—РјРµР№РєР°");
+        frame.setBounds(0,0,800,650);
+
+        // РЎРѕР·РґР°РµРј С…РѕР»СЃС‚ (РїР°РЅРµР»СЊ), РЅР° РєРѕС‚РѕСЂРѕРј РІСЃРµ СЂР°Р·РјРµСЃС‚РёРј
+        MyPanel panel = new MyPanel();
+
+
+        frame.add(panel);
+        frame.setVisible(true);
     }
 
 }

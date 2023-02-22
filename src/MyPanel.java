@@ -1,43 +1,63 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class MyPanel extends JPanel {
 
-    // Логика игры
-    // private MyGame myGame;
+    // РР·РѕР±СЂР°Р¶РµРЅРёСЏ, РёСЃРїРѕР»СЊР·СѓРµРјС‹Рµ РІ РёРіСЂРµ
+    private Image fon, telo, golova, ob, endg;
 
-    // Таймеры отрисовки и изменения логики игры
-    //private Timer tmDraw;
-
-    // Изображения, используемые в игре
-    Image fon, telo, golova, ob, endg;
-
-    // Надпись для количества очков
-    private JLabel lb;
-
-    // Две кнопки
+    // Р”РІРµ РєРЅРѕРїРєРё
     private JButton btn1, btn2;
 
     public MyPanel() {
 
+        // Р—Р°РіСЂСѓР¶Р°РµРј РєР°СЂС‚РёРЅРєРё
+        try {
+            fon = ImageIO.read(new File("img/fon.jpg"));
+            telo = ImageIO.read(new File("img/telo.png"));
+            golova = ImageIO.read(new File("img/golova.png"));
+            ob = ImageIO.read(new File("img/ob.png"));
+            endg = ImageIO.read(new File("img/endg.jpg"));
+        } catch (Exception e) {
+            System.out.println("РљР°СЂС‚РёРЅРєРё РЅРµ Р·Р°РіСЂСѓР·РёР»РёСЃСЊ");
+        }
+
+        // Р§С‚РѕР±С‹ СЂР°Р·РјРµС‰Р°С‚СЊ СЌР»РµРјРµРЅС‚С‹ РєР°Рє С…РѕС‚РёРј
         setLayout(null);
 
-        lb = new JLabel("Очки: 0");
-        lb.setForeground(Color.DARK_GRAY);
-        lb.setFont(new Font("serif", 0,30));
-        lb.setBounds(630,200,150,50);
-        add(lb);
-
-        btn1 = new JButton("Новая игра");
-        btn1.setForeground(Color.DARK_GRAY);
+        btn1 = new JButton("РќРѕРІР°СЏ РёРіСЂР°");
+        btn1.setForeground(Color.BLUE);
         btn1.setFont(new Font("serif", 0,20));
         btn1.setBounds(630,30,150,50);
         add(btn1);
 
-        btn2 = new JButton("Завершить");
-        btn2.setForeground(Color.DARK_GRAY);
+        btn2 = new JButton("Р’С‹С…РѕРґ");
+        btn2.setForeground(Color.RED);
         btn2.setFont(new Font("serif", 0,20));
         btn2.setBounds(630,100,150,50);
         add(btn2);
+    }
+
+    // РњРµС‚РѕРґ РѕС‚СЂРёСЃРѕРІРєРё
+    @Override
+    public void paintComponent(Graphics gr) {
+        super.paintComponent(gr);
+
+        // РћС‚СЂРёСЃРѕРІРєР° С„РѕРЅР°
+        gr.drawImage(fon, 0, 0, 800, 650, null);
+
+        // РћС‚СЂРёСЃРѕРІРєР° СЃРµС‚РєРё РёРіСЂРѕРІРѕРіРѕ РїРѕР»СЏ
+        gr.setColor(Color.BLUE);
+        for (int i = 0; i <= 30; i++) {
+            gr.drawLine(10 + i*20,10, 10 + i*20, 610);
+            gr.drawLine(10,10 + i*20, 610, 10 + i*20);
+        }
+
+        // РќР°СЂРёСЃСѓРµРј Р·РјРµР№РєСѓ
+        gr.drawImage(golova, 10, 10,20 ,20,null);
+        gr.drawImage(ob, 30, 30,20 ,20,null);
+
     }
 }
