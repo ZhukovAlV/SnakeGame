@@ -49,17 +49,18 @@ public class MyPanel extends JPanel {
         tmDraw = new Timer(20, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Вызываем перерисовку
                 repaint();
             }
         });
        // tmDraw = new Timer(20, e -> repaint());
         tmDraw.start();
 
-        tmUpdate = new Timer(500, new ActionListener() {
+        tmUpdate = new Timer(200, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Перемещаем голову змейки
-                myGame.peremGolova();
+                if (!myGame.endg) myGame.perem();
 
                 // Выводим информацию о количестве очков
                 lb.setText("Счет " + myGame.kol);
@@ -122,6 +123,8 @@ public class MyPanel extends JPanel {
                         gr.drawImage(golova, 10 + j*20, 10 + i*20,20,20,null);
                     } else if (myGame.mas[i][j] == -1) {
                         gr.drawImage(ob, 10 + j*20, 10 + i*20,20,20,null);
+                    } else if (myGame.mas[i][j] >= 2) {
+                        gr.drawImage(telo, 10 + j*20, 10 + i*20,20,20,null);
                     }
 
             }
@@ -133,6 +136,8 @@ public class MyPanel extends JPanel {
             gr.drawLine(10 + i*20,10, 10 + i*20, 610);
             gr.drawLine(10,10 + i*20, 610, 10 + i*20);
         }
+
+        if (myGame.endg) gr.drawImage(endg, 250, 200,200,100,null);
     }
 
     class MyKey implements KeyListener {
@@ -149,10 +154,10 @@ public class MyPanel extends JPanel {
 
             // Если нажатие одной из стрелочек, то мнеяем направление
             switch (key) {
-                case KeyEvent.VK_LEFT -> myGame.napr = 0;
-                case KeyEvent.VK_UP -> myGame.napr = 1;
-                case KeyEvent.VK_RIGHT -> myGame.napr = 2;
-                case KeyEvent.VK_DOWN -> myGame.napr = 3;
+                case KeyEvent.VK_LEFT -> myGame.newNapr = 0;
+                case KeyEvent.VK_UP -> myGame.newNapr = 1;
+                case KeyEvent.VK_RIGHT -> myGame.newNapr = 2;
+                case KeyEvent.VK_DOWN -> myGame.newNapr = 3;
             }
 
         }
