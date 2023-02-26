@@ -11,6 +11,12 @@ public class MyPanel extends JPanel {
     // Две кнопки
     private JButton btn1, btn2;
 
+    // Таймер
+    private Timer update;
+
+    // Логика игры
+    private MyGame myGame;
+
     public MyPanel() {
 
         // Загружаем картинки
@@ -38,6 +44,31 @@ public class MyPanel extends JPanel {
         btn2.setFont(new Font("serif", 0,20));
         btn2.setBounds(630,100,150,50);
         add(btn2);
+        btn2.addActionListener(eventExit -> System.exit(0));
+
+        update = new Timer(250, event -> {
+
+            if (MyGame.napr == 0) {
+                if (MyGame.gX == 29) MyGame.gX = 0;
+                else MyGame.gX++;
+            } else if (MyGame.napr == 1) {
+                if (MyGame.gY == 0) MyGame.gY = 29;
+                else MyGame.gY--;
+            } else if (MyGame.napr == 2) {
+                if (MyGame.gX == 0) MyGame.gX = 29;
+                else MyGame.gX--;
+            } else if (MyGame.napr == 3) {
+                if (MyGame.gY == 29) MyGame.gY = 0;
+                else MyGame.gY++;
+            }
+
+            repaint();
+        });
+        update.start();
+
+
+        addKeyListener(new MyKeyListener());
+        setFocusable(true);
     }
 
     // Метод отрисовки
@@ -56,7 +87,7 @@ public class MyPanel extends JPanel {
         }
 
         // Нарисуем змейку
-        gr.drawImage(golova, 10, 10,20 ,20,null);
+        gr.drawImage(golova, 10 + (myGame.gX * 20), 10 + (myGame.gY * 20),20 ,20,null);
         gr.drawImage(ob, 30, 30,20 ,20,null);
 
     }
